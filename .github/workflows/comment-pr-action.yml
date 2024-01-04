@@ -42,8 +42,8 @@ jobs:
           body: '- publishing to npm...'
           edit-mode: append
 
-      - name: Run stencil dev release...
-        uses: ./.github/workflows/release-dev.yml
+      # - name: Run stencil dev release...
+      #   uses: ./.github/workflows/release-dev.yml
 
       # we need to run this again since if we created a comment we won't already
       # have a reference to it from earlier
