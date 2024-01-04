@@ -28,7 +28,7 @@ jobs:
         id: comment
         with:
           issue-number: ${{ github.event.issue.number }}
-          body: "I'm going to deploy this PR to Github! Stay tuned..."
+          body: "I'm going to build and deploy this PR to npm! Stay tuned..."
 
       # - name: Run stencil dev release...
       #   uses: ./.github/workflows/release-dev.yml
@@ -40,11 +40,12 @@ jobs:
           issue-number: ${{ github.event.issue.number }}
           # need to get the build version in here somehow, out of the deploy action
           body: |
-            This PR was published! 🎉
+
+            This PR was published to version ! 🎉
 
             Install it here:
 
             ```sh
-            npm install @stencil/core@version
+            npm install @stencil/core@VERSION
             ```
           edit-mode: append
