@@ -9,7 +9,7 @@ jobs:
     if: ${{github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')}}
     steps:
       - name: Get PR branch
-        uses: xt0rted/pull-request-comment-branch@v1
+        uses: xt0rted/pull-request-comment-branch@v2
         id: comment-branch
 
       - name: Checkout PR branch
@@ -21,7 +21,7 @@ jobs:
         uses: peter-evans/find-comment@a54c31d7fa095754bfef525c0c8e5e5674c4b4b1 # v2.4.0
         id: fc
         with:
-          issue-number: ${{ github.event.issue.pull_request.number }}
+          issue-number: ${{ github.event.issue.number }}
           comment-author: 'github-actions[bot]'
           body-includes: '### dev build deploy bot'
 
