@@ -30,7 +30,7 @@ jobs:
         if: steps.fc.outputs.comment-id == ''
         uses: peter-evans/find-comment@a54c31d7fa095754bfef525c0c8e5e5674c4b4b1 # v2.4.0
         with:
-          issue-number: ${{ github.event.issue.pull_request.number }}
+          issue-number: ${{ github.event.issue.number }}
           # need to get the current time in her
           body: '### dev build deploy bot\n\n**Activity log**\n- publishing to npm...'
 
@@ -51,7 +51,7 @@ jobs:
         uses: peter-evans/find-comment@a54c31d7fa095754bfef525c0c8e5e5674c4b4b1 # v2.4.0
         id: fcc
         with:
-          issue-number: ${{ github.event.issue.pull_request.number }}
+          issue-number: ${{ github.event.issue.number }}
           comment-author: 'github-actions[bot]'
           body-includes: '### dev build deploy bot'
 
@@ -59,7 +59,7 @@ jobs:
         uses: peter-evans/create-or-update-comment@23ff15729ef2fc348714a3bb66d2f655ca9066f2 # v3.1.0
         with:
           comment-id: ${{ steps.fcc.outputs.comment-id }}
-          issue-number: ${{ github.event.issue.pull_request.number }}
+          issue-number: ${{ github.event.issue.number }}
           # need to get the build version in here somehow, out of the deploy action
           body: "- published!"
           edit-mode: append
