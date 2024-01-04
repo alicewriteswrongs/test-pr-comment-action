@@ -40,6 +40,7 @@ jobs:
           issue-number: ${{ github.event.issue.number }}
           # need to get the build version in here somehow, out of the deploy action
           body: |
+            I'm going to build and deploy this PR to npm! Stay tuned...
 
             This PR was published to version ! 🎉
 
@@ -48,4 +49,4 @@ jobs:
             ```sh
             npm install @stencil/core@VERSION
             ```
-          edit-mode: append
+          edit-mode: replace
