@@ -7,6 +7,8 @@ on:
 
 jobs:
   deploy:
+    permissions:
+      pull-requests: write
     name: A testing job to try writing a comment in response to a comment
     runs-on: ubuntu-latest
     if: ${{ github.event.issue.pull_request && github.event.comment.body == '/deploy' }}
@@ -20,13 +22,13 @@ jobs:
         with:
           ref: ${{ steps.comment-branch.outputs.head_ref }}
 
-      - name: Find Comment
-        uses: peter-evans/find-comment@a54c31d7fa095754bfef525c0c8e5e5674c4b4b1 # v2.4.0
-        id: fc
-        with:
-          issue-number: ${{ github.event.issue.number }}
-          comment-author: 'github-actions[bot]'
-          body-includes: '### dev build deploy bot'
+      # - name: Find Comment
+      #   uses: peter-evans/find-comment@a54c31d7fa095754bfef525c0c8e5e5674c4b4b1 # v2.4.0
+      #   id: fc
+      #   with:
+      #     issue-number: ${{ github.event.issue.number }}
+      #     comment-author: 'github-actions[bot]'
+      #     body-includes: '### dev build deploy bot'
 
       # create a comment if one wasn't found
       # - name: Create comment
