@@ -30,6 +30,9 @@ jobs:
 
   update-comment:
     needs: [create-comment, release]
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - name: Update comment
         uses: peter-evans/create-or-update-comment@23ff15729ef2fc348714a3bb66d2f655ca9066f2 # v3.1.0
