@@ -43,6 +43,9 @@ jobs:
           issue-number: ${{ github.event.issue.number }}
           body: "I'm going to build and deploy this PR to npm! Stay tuned..."
 
+      - name: list contents
+        run: tree .github/
+
       - name: Run stencil dev release...
         id: release
         uses: ./.github/workflows/release-dev.yml
