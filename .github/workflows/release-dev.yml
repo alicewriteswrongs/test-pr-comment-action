@@ -20,7 +20,7 @@ jobs:
       # do a plain checkout if it's on dispatch
       - name: Checkout Code (workflow_dispatch)
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-        if: ${{ github.event_name == "workflow_dispatch" }}
+        if: ${{ github.event_name == 'workflow_dispatch' }}
 
       # we need this action because the HEAD on an 'issue' event is normally
       # the HEAD of the main branch, not the PR. This relates to the way that
@@ -28,13 +28,13 @@ jobs:
       # See https://github.com/xt0rted/pull-request-comment-branch
       # we only want to do this on workflow_call
       - name: Get PR branch version (workflow_call)
-        if: ${{ github.event_name == "workflow_call" }}
+        if: ${{ github.event_name == 'workflow_call' }}
         uses: xt0rted/pull-request-comment-branch@d97294d304604fa98a2600a6e2f916a84b596dc7 # v2.0.0
         id: comment-branch
 
       - name: Checkout PR branch (workflow_call)
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-        if: ${{ github.event_name == "workflow_call" }}
+        if: ${{ github.event_name == 'workflow_call' }}
         with:
           ref: ${{ steps.comment-branch.outputs.head_ref }}
 
