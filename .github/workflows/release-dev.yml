@@ -20,26 +20,17 @@ jobs:
       - name: log event name
         run: echo ${{ github.event_name }}
 
-      # do a plain checkout if it's on dispatch
+      # do a plain checkout if it's not running in the context of an
+      # issue_comment event
       - name: Checkout Code (workflow_dispatch)
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-        if: ${{ github.event_name == 'workflow_dispatch' }}
+        if: ${{ github.event_name != 'issue_comment' }}
 
-      # we need this action because the HEAD on an 'issue' event is normally
-      # the HEAD of the main branch, not the PR. This relates to the way that
-      # Github treats issues and PRs as the same thing in some ways.
-      # See https://github.com/xt0rted/pull-request-comment-branch
-      # we only want to do this on workflow_call
-      - name: Get PR branch version (workflow_call)
-        if: ${{ github.event_name == 'issue_comment' }}
-        uses: xt0rted/pull-request-comment-branch@d97294d304604fa98a2600a6e2f916a84b596dc7 # v2.0.0
-        id: comment-branch
-
-      - name: Checkout PR branch (workflow_call)
+      - name: Checkout Code (PR comment)
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-        if: ${{ github.event_name == 'issue_comment' }}
+        if: ${{ github.event_name == 'issue_comment' && github.event.issue.pull_request }}
         with:
-          ref: ${{ steps.comment-branch.outputs.head_ref }}
+          ref: ${{ github.event.issue.pull_request.head.ref }}
 
       - name: echo latest commit
         run: git log --oneline | head -n 1
