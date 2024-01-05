@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.issue.pull_request && github.event.comment.body == '/release-dev' }}
     steps:
-      - name: authorize
-        uses: octokit/request-action@v2.1.9
-        with:
-          route: GET /orgs/:organisation/teams/:team/memberships/${{ github.event.comment.user.id }}
-          team: stencil
-          organisation: ionic-team
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      # - name: authorize
+      #   uses: octokit/request-action@v2.1.9
+      #   with:
+      #     route: GET /orgs/:organisation/teams/:team/memberships/${{ github.event.comment.user.id }}
+      #     team: stencil
+      #     organisation: ionic-team
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       # we need this action because the HEAD on an 'issue' event is normally
       # the HEAD of the main branch, not the PR. This relates to the way that
